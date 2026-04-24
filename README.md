@@ -7,9 +7,9 @@ for own projects.
 
 ## Installation
 
-\```
+```
 npm install heron-ts
-\```
+```
 
 ## Overview
 
@@ -23,7 +23,7 @@ Heron-TS modules:
 
 ### fn
 
-\```ts
+```ts
 import { fn } from 'heron-ts'
 import type { Unary, Binary, Ternary, Thunk, Predicate } from 'heron-ts'
 
@@ -40,11 +40,11 @@ fn.identity(42) // 42
 // always — returns a function that always returns the same value
 const alwaysFive = fn.always(5)
 alwaysFive() // 5
-\```
+```
 
 ### maybe
 
-\```ts
+```ts
 import { maybe } from 'heron-ts'
 import type { Maybe } from 'heron-ts'
 
@@ -56,7 +56,7 @@ pipe(
   maybe.filter(name => name.length > 3),
   maybe.getOrElse(() => 'Anonymous')
 ) // 'Anonymous'
-\```
+```
 
 | Function | Description |
 |---|---|
@@ -71,7 +71,7 @@ pipe(
 
 ### result
 
-\```ts
+```ts
 import { result } from 'heron-ts'
 import type { Result } from 'heron-ts'
 
@@ -86,7 +86,7 @@ pipe(
     error => `Failed: ${error}`
   )
 ) // 'Welcome'
-\```
+```
 
 | Function | Description |
 |---|---|
@@ -105,7 +105,7 @@ pipe(
 
 ### guard
 
-\```ts
+```ts
 import { guard } from 'heron-ts'
 
 guard.isNull(null)        // true
@@ -114,7 +114,7 @@ guard.isNullable(null)    // true
 guard.isDefined(42)       // true
 guard.isOk(result.ok(42)) // true
 guard.isErr(result.err('failed')) // true
-\``
+```
 
 ## License
 
