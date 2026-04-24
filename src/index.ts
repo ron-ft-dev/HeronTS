@@ -1,0 +1,7 @@
+export * as fn from './function'
+export * as maybe from './maybe'
+export * as result from './result'
+export * as guard from './guard'
+export type { Maybe } from './type'
+export type { Ok, Err, Result } from './type'
+export type { Unary, Binary, Ternary, Thunk, Predicate } from './type'
