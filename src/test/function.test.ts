@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { identity, always, pipe, flow } from '../function'
-import type { Binary } from '../type'
+import { identity, always, pipe, flow, curry } from '../function'
+import { isNullable } from '../guard'
+import type { Binary, Unary, Maybe } from '../type'
 
 describe('identity', () => {
   it('returns the value it was given', () => {
@@ -29,5 +30,19 @@ describe('flow', () => {
     const double = (x: number) => x * 2;
     const increment = (x: number) => x + 1;
     expect(flow(double, increment)(3)).toBe(7)
+  })
+})
+
+describe('curry', () => {
+  it('transforms a multi-arg function to a chain of unary functions', () => {
+    const binAdd: Binary<number> = (a: number, b: number) => a + b
+    const binMaybeString: Binary<Maybe<string>, string> = (maybe: Maybe<string>, trail: string) =>
+      isNullable(maybe) ? trail : [maybe, trail].join(' ')
+    const curAdd: Unary<number, Unary<number>> = curry(binAdd)
+    const curMaybeString: Unary<Maybe<string>, Unary<string>> = curry(binMaybeString)
+    expect(binAdd(2, 2)).toBe(4)
+    expect(curAdd(10)(2)).toBe(12)
+    expect(binMaybeString('hello', 'world')).toBe('hello world')
+    expect(curMaybeString(null)('fallback')).toBe('fallback')
   })
 })

@@ -2,18 +2,18 @@ export type Thunk<Output> = () => Output
 
 export type Unary<Input, Output = Input> = (argument: Input) => Output
 
-export type Binary<InputA, InputB, Output = InputA> = (
+export type Binary<InputA, InputB = InputA, Output = InputA> = (
   argumentA: InputA,
   argumentB: InputB
 ) => Output
 
-export type Ternary<InputA, InputB, InputC, Output = InputA> = (
+export type Ternary<InputA, InputB = InputA, InputC = InputA, Output = InputA> = (
   argumentA: InputA,
   argumentB: InputB,
   argumentC: InputC
 ) => Output
 
-export type Quaternary<InputA, InputB, InputC, InputD, Output = InputA> = (
+export type Quaternary<InputA, InputB = InputA, InputC = InputA, InputD = InputA, Output = InputA> = (
   argumentA: InputA,
   argumentB: InputB,
   argumentC: InputC,

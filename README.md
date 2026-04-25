@@ -40,6 +40,14 @@ fn.identity(42) // 42
 // always — returns a function that always returns the same value
 const alwaysFive = fn.always(5)
 alwaysFive() // 5
+
+// curry — transform a multi-argument function into a chain of unary functions
+const add = curry((a: number, b: number) => a + b)
+const add10 = add(10)
+
+add10(5)  // 15
+add10(20) // 30
+pipe(5, add(10)) // 15
 ```
 
 ### maybe
