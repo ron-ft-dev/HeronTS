@@ -5,7 +5,6 @@
  */
 
 import type { Unary, Binary, Ternary, Nullable, Lazy, Predicate, Thunk } from '../prelude/types'
-import { Maybe } from './maybe'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -806,25 +805,6 @@ const isErr = <Value, Error>(
 ): result is Err<Error> =>
   result._tag === 'Err'
 
-/**
- * Converts a `Result<Value, Error>` to a `Maybe<Value>`, discarding
- * the error.
- *
- * **Type shape:**
- *
- * `toMaybe : Result<Value, Error> -> Maybe<Value>`
- *
- * @example
- * import { Result } from 'heron-ts/monad/result'
- *
- * Result.toMaybe(Result.ok(5))       // Maybe.some(5)
- * Result.toMaybe(Result.err('oops')) // Maybe.none
- */
-const toMaybe = <Value, Error>(
-  result: Result<Value, Error>,
-): Maybe<Value> =>
-  result._tag === 'Ok' ? Maybe.some(result.value) : Maybe.none
-
 // ─────────────────────────────────────────────────────────────────────────────
 // Namespace
 // ─────────────────────────────────────────────────────────────────────────────
@@ -884,5 +864,4 @@ export const Result = {
   swap,
   isOk,
   isErr,
-  toMaybe,
 } as const

@@ -223,3 +223,7 @@ export type {
   Observer,
   Unsubscribe,
 } from './monad/observable'
+
+export { Convert } from './monad/convert'
+
+

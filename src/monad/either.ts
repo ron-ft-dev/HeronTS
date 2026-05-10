@@ -17,8 +17,7 @@
  * "success rail."
  */
 
-import type { Unary, Lazy } from '../prelude/types'
-import { Maybe } from './maybe'
+import type { Unary } from '../prelude/types'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -347,41 +346,8 @@ const swap = <LeftValue, RightValue>(
     ? right(either.value)
     : left(either.value)
 
-/**
- * Extracts the `Left` value as a `Maybe`. Returns `Maybe.none` if `Right`.
- *
- * **Type shape:**
- *
- * `fromLeft : Either<LeftValue, RightValue> -> Maybe<LeftValue>`
- *
- * @example
- * import { Either } from 'heron-ts/monad/either'
- *
- * Either.fromLeft(Either.left('hello'))  // Maybe.some('hello')
- * Either.fromLeft(Either.right(42))      // Maybe.none
- */
-const fromLeft = <LeftValue, RightValue>(
-  either: Either<LeftValue, RightValue>,
-): Maybe<LeftValue> =>
-  either._tag === 'Left' ? Maybe.some(either.value) : Maybe.none
 
-/**
- * Extracts the `Right` value as a `Maybe`. Returns `Maybe.none` if `Left`.
- *
- * **Type shape:**
- *
- * `fromRight : Either<LeftValue, RightValue> -> Maybe<RightValue>`
- *
- * @example
- * import { Either } from 'heron-ts/monad/either'
- *
- * Either.fromRight(Either.right(42))      // Maybe.some(42)
- * Either.fromRight(Either.left('hello'))  // Maybe.none
- */
-const fromRight = <LeftValue, RightValue>(
-  either: Either<LeftValue, RightValue>,
-): Maybe<RightValue> =>
-  either._tag === 'Right' ? Maybe.some(either.value) : Maybe.none
+
 
 /**
  * Returns `true` if the `Either` is `Left`.
@@ -501,8 +467,6 @@ export const Either = {
   chainLeft,
   chainRight,
   swap,
-  fromLeft,
-  fromRight,
   isLeft,
   isRight,
   partition,

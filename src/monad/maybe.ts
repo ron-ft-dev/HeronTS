@@ -5,7 +5,6 @@
  */
 
 import type { Unary, Binary, Ternary, Nullable, Lazy, Predicate } from '../prelude/types'
-import { Result } from './result'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
@@ -591,37 +590,7 @@ const getOrElse = <Value>(
   (maybe: Maybe<Value>): Value =>
     maybe._tag === 'Some' ? maybe.value : fallback()
 
-/**
- * Converts a `Maybe<Value>` into a `Result<Value, Error>` by providing
- * an error value for the `None` case.
- *
- * **Type shape:**
- *
- * `toResult : Lazy<Error> -> Maybe<Value> -> Result<Value, Error>`
- *
- * @example
- * import { Maybe } from 'heron-ts/monad/maybe'
- * import { pipe } from 'heron-ts/prelude'
- *
- * pipe(
- *   Maybe.some(5),
- *   Maybe.toResult(() => 'value was missing'),
- * )
- * // Result.ok(5)
- *
- * pipe(
- *   Maybe.none,
- *   Maybe.toResult(() => 'value was missing'),
- * )
- * // Result.err('value was missing')
- */
-const toResult = <Value, Error>(
-  onNone: Lazy<Error>,
-) =>
-  (maybe: Maybe<Value>): Result<Value, Error> =>
-    maybe._tag === 'Some'
-      ? Result.ok(maybe.value)
-      : Result.err(onNone())
+
 
 /**
  * Returns `true` if the `Maybe` is `Some`.
@@ -714,7 +683,6 @@ export const Maybe = {
   traverse,
   fromNullable,
   getOrElse,
-  toResult,
   isSome,
   isNone,
 } as const

@@ -3,27 +3,72 @@
   "version": "1.0.0",
   "description": "WIP",
   "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types":   "./dist/index.d.ts",
+      "import":  "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./prelude": {
+      "types":   "./dist/prelude/index.d.ts",
+      "import":  "./dist/prelude/index.js",
+      "require": "./dist/prelude/index.cjs"
+    },
+    "./monad/*": {
+      "types":   "./dist/monad/*.d.ts",
+      "import":  "./dist/monad/*.js",
+      "require": "./dist/monad/*.cjs"
+    },
+    "./prelude/*": {
+      "types":   "./dist/prelude/*.d.ts",
+      "import":  "./dist/prelude/*.js",
+      "require": "./dist/prelude/*.cjs"
+    },
+    "./monad/convert": {
+      "types":   "./dist/monad/convert.d.ts",
+      "import":  "./dist/monad/convert.js",
+      "require": "./dist/monad/convert.cjs"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
+    "build": "tsup",
     "typecheck": "tsc --noEmit",
     "test": "vitest",
-    "build": "tsup src/index.ts --format esm,cjs --dts"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "typescript": "^5.6.3",
-    "vitest": "^4.1.5",
-    "tsup": "^8.0.0"
+    "vitest":     "^4.1.5",
+    "tsup":       "^8.0.0"
+  },
+  "keywords": [
+    "functional",
+    "fp",
+    "monad",
+    "typescript",
+    "continuation",
+    "maybe",
+    "result",
+    "either",
+    "io",
+    "reader",
+    "state",
+    "writer",
+    "task",
+    "observable",
+    "parser"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
   }
 }
